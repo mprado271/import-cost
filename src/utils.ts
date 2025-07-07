@@ -1,5 +1,5 @@
 import fs from 'node:fs'
-import builtinModules from 'builtin-modules/static.js'
+import builtinModules from 'builtin-modules'
 import escalade from 'escalade/sync'
 
 import type { Lang } from './index'

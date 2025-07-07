@@ -2,6 +2,7 @@ import { dirname } from 'node:path'
 
 import type { Message } from 'esbuild'
 import { gzipSize } from 'gzip-size'
+import QuickLRU from 'quick-lru'
 
 import type { PackageInfo } from './babel'
 
@@ -21,7 +22,7 @@ export interface GetSizeResult {
   package: PackageInfoWithSize
 }
 
-export const cache = new Map<string, GetSizeResult>()
+export const cache = new QuickLRU<string, GetSizeResult>({ maxSize: 100 })
 
 export async function getSize({ path, name, line, string }: PackageInfo, { esbuildPath, external }: getSizeOptions = {}): Promise<GetSizeResult> {
   if (cache.has(string))
@@ -53,7 +54,10 @@ export async function getSize({ path, name, line, string }: PackageInfo, { esbui
   else {
     size = gzip = 0
   }
-  return { errors, warnings, package: { path, name, line, string, size, gzip } }
+  let result = { errors, warnings, package: { path, name, line, string, size, gzip } }
+  if (errors.length === 0 && warnings.length === 0)
+    cache.set(string, result)
+  return result
 }
 
 function convertError(e: any) {
