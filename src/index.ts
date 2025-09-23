@@ -1,7 +1,6 @@
-import type { Message } from 'esbuild'
+import type { LogLevel, Message } from 'esbuild'
 import type { PackageInfo } from './babel'
 import type { PackageInfoWithSize } from './build'
-
 import { getPackages } from './babel'
 import { cache, getSize } from './build'
 import { extractScriptFromHtml, guessLang, makeExternal } from './utils'
@@ -13,6 +12,7 @@ export interface ImportCostOptions {
   external?: string[]
   esbuildPath?: string
   filter?: (path: string) => boolean
+  logLevel?: LogLevel
 }
 
 export interface ImportCostResult {
@@ -25,7 +25,7 @@ function yes() {
   return true
 }
 
-export async function importCost(path: string, code: string, { lang, external, esbuildPath, filter = yes }: ImportCostOptions = {}) {
+export async function importCost(path: string, code: string, { lang, external, esbuildPath, filter = yes, logLevel }: ImportCostOptions = {}) {
   lang ??= guessLang(path)
   external ??= makeExternal(path)
 
@@ -41,7 +41,7 @@ export async function importCost(path: string, code: string, { lang, external, e
   packages = packages.filter(pkg => filter(pkg.name))
 
   const result: ImportCostResult = { errors: [], warnings: [], packages: [] }
-  for await (const { errors, warnings, package: pkg } of packages.map(p => getSize(p, { esbuildPath, external }))) {
+  for await (const { errors, warnings, package: pkg } of packages.map(p => getSize(p, { esbuildPath, external, logLevel }))) {
     result.errors = result.errors.concat(errors)
     result.warnings = result.warnings.concat(warnings)
     result.packages.push(pkg)

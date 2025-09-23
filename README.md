@@ -21,6 +21,7 @@ lodash    70 kiB   file.ts:2
 
 ```js
 import { importCost } from '@hyrious/import-cost'
+
 const result = await importCost('file.ts', `
   import { uniqueId } from 'lodash'
 `)
@@ -42,6 +43,7 @@ const result = await importCost('file.ts', `
     - `line` {Number} The line number of the import statement.
     - `size` {Number} The size of the package in bytes.
     - `gzip` {Number} The size of the package in bytes after gzip.
+    - `fail` {Boolean} `true` if failed to bundle the package with esbuild.
 
 #### cache
 

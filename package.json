@@ -4,6 +4,7 @@
   "description": "Get package size of import statements, powered by esbuild",
   "author": "hyrious <hyrious@outlook.com>",
   "license": "MIT",
+  "repository": "hyrious/import-cost",
   "keywords": [
     "import",
     "gzip",
@@ -18,9 +19,9 @@
   "types": "dist/index.d.ts",
   "bin": "cli.mjs",
   "files": [
-    "src",
+    "cli.mjs",
     "dist",
-    "cli.mjs"
+    "src"
   ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --clean --treeshake --target esnext --dts"
@@ -29,24 +30,24 @@
     "esbuild": "*"
   },
   "dependencies": {
-    "@babel/parser": "^7.28.0",
-    "@babel/traverse": "^7.28.0",
-    "@babel/types": "^7.28.0",
+    "@babel/parser": "^7.28.4",
+    "@babel/traverse": "^7.28.4",
+    "@babel/types": "^7.28.4",
     "builtin-modules": "^5.0.0",
     "escalade": "^3.2.0",
     "gzip-size": "^7.0.0",
-    "pretty-bytes": "^7.0.0",
-    "quick-lru": "^7.0.1",
+    "pretty-bytes": "^7.1.0",
+    "quick-lru": "^7.2.0",
     "sade": "^1.8.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.16.2",
-    "@types/babel__traverse": "^7.20.7",
-    "@types/node": "^24.0.10",
-    "esbuild": "^0.25.6",
-    "eslint": "^9.30.1",
+    "@antfu/eslint-config": "^5.4.1",
+    "@types/babel__traverse": "^7.28.0",
+    "@types/node": "^24.5.2",
+    "esbuild": "^0.25.10",
+    "eslint": "^9.36.0",
     "lodash-es": "^4.17.21",
     "tsup": "^8.5.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   }
 }

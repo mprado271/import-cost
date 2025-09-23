@@ -1,8 +1,7 @@
 import type { ParserPlugin } from '@babel/parser'
-
-import * as t from '@babel/types'
-import mod from '@babel/traverse'
 import { parse } from '@babel/parser'
+import mod from '@babel/traverse'
+import * as t from '@babel/types'
 
 // @ts-ignore
 const traverse = mod.default as typeof mod
@@ -36,7 +35,7 @@ export interface PackageInfo {
 export function getPackages(path: string, source: string, { language = 'js', lineOffset = 0 }: GetPackagesOptions = {}): PackageInfo[] {
   const plugins = language === 'ts' ? TS_PLUGINS : language === 'tsx' ? TSX_PLUGINS : JS_PLUGINS
   const ast = parse(source, { sourceType: 'module', plugins })
-  const packages: { path: string; name: string; line: number; string: string }[] = []
+  const packages: { path: string, name: string, line: number, string: string }[] = []
   traverse(ast, {
     ImportDeclaration({ node }) {
       if (node.importKind !== 'type') {

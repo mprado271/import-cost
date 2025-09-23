@@ -1,8 +1,7 @@
+import type { Lang } from './index'
 import fs from 'node:fs'
 import builtinModules from 'builtin-modules'
 import escalade from 'escalade/sync'
-
-import type { Lang } from './index'
 
 const languages = new Set<string | undefined>(['js', 'ts', 'jsx', 'tsx', 'vue', 'svelte'])
 
