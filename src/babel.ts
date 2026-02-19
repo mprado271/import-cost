@@ -9,7 +9,7 @@ const traverse = mod.default as typeof mod
 const PARSE_PLUGINS: ParserPlugin[] = [
   'doExpressions',
   'objectRestSpread',
-  ['decorators', { decoratorsBeforeExport: true }],
+  'decorators-legacy', // supports parameter decorators (@Inject, etc) - NestJS, Angular
   'classProperties',
   'asyncGenerators',
   'functionBind',

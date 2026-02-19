@@ -4,7 +4,7 @@
   "description": "Get package size of import statements, powered by esbuild",
   "author": "hyrious <hyrious@outlook.com>",
   "license": "MIT",
-  "repository": "hyrious/import-cost",
+  "repository": {"type": "git", "url": "https://github.com/mprado271/import-cost.git"},
   "keywords": [
     "import",
     "gzip",
@@ -24,7 +24,8 @@
     "src"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm --clean --treeshake --target esnext --dts"
+    "build": "tsup src/index.ts --format esm --clean --treeshake --target esnext --dts",
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "esbuild": "*"
